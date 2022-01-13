@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Connexion user</description>
+   <name>Connexion</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>bc5779fa-72cf-47c7-9b75-62bda5f025fb</testCaseGuid>
+</TestCaseEntity>

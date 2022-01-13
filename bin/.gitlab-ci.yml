@@ -1,0 +1,87 @@
+image: ubuntu
+
+variables:
+  SOME_VAR: "some value"
+
+stages:
+  - build
+  - test
+  - sonarqube
+  - docker
+  - deploy
+
+before_script:
+  - echo "Start CI/CD"
+  - echo "SOME_VAR = $SOME_VAR" # calls my custom variable
+  - echo $CI_JOB_STAGE  # calls a predefined variable -  https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+  - echo $CI_COMMIT_SHORT_SHA # calls another predefined variable
+
+build:
+  stage: build
+  image: maven:3-alpine
+  script:
+    - echo "Build process"
+    - mvn clean package
+    - echo "Build ok"
+  only:
+    - master
+  tags:
+    - alpine-docker
+
+unittest:
+  stage: test
+  script:
+    - echo "start test"
+    - echo "test ok"
+  only:
+    - master
+  tags:
+    - alpine-docker
+
+katalon_test_suite:
+  stage: test
+  script:
+    - echo "start katalon test suite"
+    - echo "katalon test suite ok"
+  only:
+    - master
+  tags:
+    - alpine-docker
+
+sonarqube:
+  stage: sonarqube
+  image: maven:3-alpine
+  script:
+    - echo "start sonarqube stage"
+    - mvn clean package -DskipTests
+    - mvn sonar:sonar -Dsonar.projectKey=csar -Dsonar.host.url=https://sonar.jojoc4.ch -Dsonar.login=6d9af9d38953eba0f993a11582e8235b8fc3cdf4
+    - echo "sonarqube ok"
+  only:
+    - master
+  tags:
+    - alpine-docker
+
+docker:
+  stage: docker
+  image: docker:dind
+  script:
+    - docker build -t registry.jojoc4.ch/csar:latest .
+    - docker push registry.jojoc4.ch/csar:latest
+  only:
+    - master
+
+deploy_ssh:
+  stage: deploy
+  before_script:
+    - echo "do some stuff before"
+  script:
+    - echo "deploy apps"
+    - echo "deploy ok"
+  only:
+    - master
+  tags:
+    - alpine-docker
+  when: manual
+
+after_script:
+  - echo "End CI/CD"

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body id="page-top" style="background: var(--gray-dark);">
+	<!-- navigation fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+	<!--For Page-->
+
+	<div class="container"
+		style="margin-top: 112.5px; margin-bottom: 11.5px;">
+		<div class="card">
+			<div class="card-body">
+				<div th:if="${param.error}">
+					<p style="font-size: 20; color: #FF1C19;">Email ou mot de passe
+						invalide</p>
+				</div>
+				<div th:if="${param.success}">
+					<p style="font-size: 20; color: #00ff00;">Compte créé avec
+						succès</p>
+				</div>
+				<form th:action="@{/login}" method="post">
+					<div class="form-group">
+						<label for="inputUsername">Email</label> <input type="email"
+							id="email" name="email" th:placeholder="Email"
+							class="form-control" required />
+					</div>
+					<div class="form-group">
+						<label for="inputPassword1">Mot de passe</label> <input
+							type="password" id="password" name="password"
+							th:placeholder="Password" class="form-control" required />
+					</div>
+					<button type="submit" class="btn btn-primary">Login</button> 
+					<a href="signup" style="color: var(- -teal);">Créer un compte</a>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer fragment -->
+	<div th:replace="fragments/fragments.html :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body id="page-top" style="background: var(--gray-dark);">
+	<!-- navigation fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+	<!--For Page-->
+
+	<div class="container"
+		style="margin-top: 112.5px; margin-bottom: 11.5px;">
+
+		<p>
+			<a class="card-link" href="/add">
+				<button class="btn btn-primary" type="button">Proposer un objet</button>
+			</a>
+		</p>
+
+		<div class="card" th:each="object: ${objects}">
+			<div class="card-body">
+				<h4 class="card-title" th:text="${object.name}"></h4>
+				<h6 class="text-muted card-subtitle mb-2">
+					<span th:each="tag: ${object.tags}"> <span
+						class="badge badge-primary" th:text="${tag.name}"></span>
+					</span>
+				</h6>
+
+				<div th:each="loan: ${loans}">
+					<div th:if="${loan != null}">
+						<div th:if="${loan.object.id == object.id}">
+							<div th:if="${loan.state == 1}">
+								<p>
+									Demandé par <span th:text="${loan.borrower.firstname}"></span>
+								</p>
+								<a class="card-link" th:href="@{/confirm(id=${loan.id})}">
+									<button class="btn btn-primary" type="button">Accepter</button>
+								</a> <a class="card-link" th:href="@{/refuse(id=${object.id})}">
+									<button class="btn btn-danger" type="button">Refuser</button>
+								</a>
+							</div>
+							<div th:if="${loan.state == 2}">
+								<p>
+									Demandé par <span th:text="${loan.borrower.firstname}"></span>
+								</p>
+								<a class="card-link" th:href="@{/askback(id=${loan.id})}">
+									<button class="btn btn-warning" type="button">Retour !</button>
+								</a>
+							</div>
+							<div th:if="${loan.state == 4}">
+								<p>
+									Demandé en retour à <span th:text="${loan.borrower.firstname}"></span>
+								</p>
+								<a class="card-link" th:href="@{/back(id=${loan.id})}">
+									<button class="btn btn-primary" type="button">Confirmer
+										le retour</button>
+								</a>
+							</div>
+							<div th:if="${loan.state == 3}">
+								<p class="card-text">Disponible</p>
+								<a class="card-link" th:href="@{/edit(id=${object.id})}">
+									<button class="btn btn-primary" type="button">Modifier</button>
+								</a> <a class="card-link"
+									th:href="@{/remove(id=${object.id}, source=own)}">
+									<button class="btn btn-danger" type="button">Supprimer</button>
+								</a>
+							</div>
+						</div>
+						<div th:unless="${loan.object.id == object.id}">
+							<p class="card-text">Disponible</p>
+							<a class="card-link" th:href="@{/edit(id=${object.id})}">
+								<button class="btn btn-primary" type="button">Modifier</button>
+							</a> <a class="card-link"
+								th:href="@{/remove(id=${object.id}, source=own)}">
+								<button class="btn btn-danger" type="button">Supprimer</button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer fragment -->
+	<div th:replace="fragments/fragments.html :: footer"></div>
+</body>
+</html>

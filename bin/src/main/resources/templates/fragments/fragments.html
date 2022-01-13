@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--  *************** header fragment*************** -->
+<head th:fragment="header">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Ça s’appelle retour!</title>
+    <meta name="theme-color" content="rgb(2,255,179)">
+    <meta name="twitter:description" content="Système de gestion de prêt. ">
+    <meta name="twitter:card" content="summary">
+    <meta name="description" content="Système de gestion de prêt.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:title" content="Ça s'appelle retour!">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo32.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="assets/img/logo180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/img/logo192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/logo512.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+
+
+<!--  ***************navigation fragment*************** -->
+<nav th:fragment="navigation" class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+    <div class="container"><a class="navbar-brand pulse animated js-scroll-trigger" href="#page-top">Ça s’appelle retour!</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/">Disponible</a></li>
+                <li th:if="${isUserConnected}"  class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="own">Proposer</a></li>
+                <li th:if="${isUserAdmin}" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="admin">admin</a></li>
+                <li th:unless="${isUserConnected}"  class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login" style="color: var(--teal);">Se connecter</a></li>
+                <li th:if="${isUserConnected}"  class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="account" style="color: var(--teal);">Mon compte</a></li>
+                <li th:if="${isUserConnected}"  class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="logout" style="color: var(--red);">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!--  ***************footer fragment*************** -->
+<div th:fragment="footer" class="text-center text-white d-lg-flex copyright py-4">
+    <div class="container"><small>Copyright ©&nbsp;Ça s’appelle retour! 2021</small></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="assets/js/design.js"></script>
+</div>
+
+</html>

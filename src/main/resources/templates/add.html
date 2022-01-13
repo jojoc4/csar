@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body id="page-top" style="background: var(--gray-dark);">
+	<!-- navigation fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+	<!--For Page-->
+
+	<div class="container"
+		style="margin-top: 112.5px; margin-bottom: 11.5px;">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Proposer un objet</h4>
+				<form  th:action="@{/add}"
+					method="post">
+					<div class="form-group">
+						<label for="inputName">Nom: </label> <input type="text"
+							id="inputName" name="name" placeholder="Nom"
+							class="form-control"  required />
+					</div>
+					<button type="submit" class="btn btn-primary">Proposer</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer fragment -->
+	<div th:replace="fragments/fragments.html :: footer"></div>
+</body>
+</html>

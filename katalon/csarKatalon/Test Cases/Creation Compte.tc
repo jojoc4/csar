@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Création d'un nouveau compte utilisateur</description>
+   <name>Creation Compte</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>f19de771-5dc2-491c-8b1f-049ed1d8f7fb</testCaseGuid>
+</TestCaseEntity>

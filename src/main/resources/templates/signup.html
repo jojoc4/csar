@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body id="page-top" style="background: var(--gray-dark);">
+	<!-- navigation fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+	<!--For Page-->
+
+	<div class="container"
+		style="margin-top: 112.5px; margin-bottom: 11.5px;">
+		<div class="card">
+			<div class="card-body">
+				<div th:if="${param.error}">
+					<p style="font-size: 20; color: #FF1C19;">Email incorrecte ou compte exsistant.</p>
+				</div>
+				<form class="form-horizontal" role="form" method="POST"
+					th:action="@{/signup}" th:object="${user}">
+					<div class="form-group">
+						<label>Nom</label> <input type="text" th:field="*{lastname}"
+							placeholder="Entrez un nom" class="form-control" id="lastname"
+							name="lastname" required />
+					</div>
+					<div class="form-group">
+						<label>Prénom</label> <input type="text" th:field="*{firstname}"
+							placeholder="Entrez un prénom" class="form-control" id="firstname"
+							name="firstname" required />
+					</div>
+					<div class="form-group">
+						<label>Email</label> <input type="email" th:field="*{email}"
+							placeholder="Entrez une addresse email" class="form-control" id="email"
+							name="email" required />
+					</div>
+					<div class="form-group">
+						<label for="inputPassword1">Mot de passe</label> <input
+							type="password" th:field="*{password}"
+							placeholder="Entrez un mot de passe (minimum 5 caractères)"
+							class="form-control" id="password" name="password" required
+							pattern=".{5,}" title="5 characters minimum" />
+					</div>
+					<button type="submit" class="btn btn-primary">Enregistrer</button> 
+					<a href="login" style="color: var(- -teal);">Se connecter</a>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer fragment -->
+	<div th:replace="fragments/fragments.html :: footer"></div>
+</body>
+</html>

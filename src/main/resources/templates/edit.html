@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body id="page-top" style="background: var(--gray-dark);">
+	<!-- navigation fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+	<!--For Page-->
+
+	<div class="container"
+		style="margin-top: 112.5px; margin-bottom: 11.5px;">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Modifier l'objet</h4>
+				<form  th:action="@{/edit(id=${object.id})}"
+					method="post">
+					<div class="form-group">
+						<label for="inputName">Nom: </label> <input type="text"
+							id="inputName" name="name" placeholder="Name"
+							class="form-control" th:value="${object.name}" required />
+					</div>
+					<button type="submit" class="btn btn-primary">Sauvegarder</button>
+				</form>
+				<h3>Tag:</h3>
+				<table>
+					<tr th:each="tag: ${object.tags}">
+						<td> <a class="card-link" th:href="@{/removeTag(idObj=${object.id}, idTag=${tag.id})}"><button class="btn btn-danger" type="button">Enlever</button></a></td>
+						<td th:text="${tag.name}"></td>
+					</tr>
+				</table>
+				<form  th:action="@{/addTag(idObj=${object.id})}"
+					method="post">
+					<select class="form-select" name="idTag">
+						<option th:each="tag: ${tags}" th:value="${tag.id}" th:text="${tag.name}")></option>
+					</select>
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer fragment -->
+	<div th:replace="fragments/fragments.html :: footer"></div>
+</body>
+</html>
